@@ -1,0 +1,14 @@
+2015-08-28 22:07:14.780 TemplateApp[21515:1361241] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/cj/Library/Developer/CoreSimulator/Devices/7672CF2F-E02C-473F-ABE3-F99907C8A817/data/Containers/Data/Application/51E6D6DE-062E-499C-8126-391F37B8AE1F/Library/Cookies/Cookies.binarycookies
+2015-08-28 22:07:15.233 TemplateApp[21515:1361241] Apache Cordova native platform version 3.8.0 is starting.
+2015-08-28 22:07:15.234 TemplateApp[21515:1361241] Multi-tasking -> Device: YES, App: YES
+2015-08-28 22:07:15.256 TemplateApp[21515:1361241] Unlimited access to network resources
+2015-08-28 22:07:15.737 TemplateApp[21515:1361241] [CDVTimer][keyboard] 0.118971ms
+2015-08-28 22:07:15.930 TemplateApp[21515:1361241] [CDVTimer][statusbar] 192.969978ms
+2015-08-28 22:07:15.946 TemplateApp[21515:1361241] [CDVTimer][file] 16.315043ms
+2015-08-28 22:07:16.009 TemplateApp[21515:1361241] [CDVTimer][splashscreen] 61.915994ms
+2015-08-28 22:07:16.009 TemplateApp[21515:1361241] [CDVTimer][TotalPluginStartup] 272.678018ms
+2015-08-28 22:07:16.612 TemplateApp[21515:1361241] Resetting plugins due to page load.
+2015-08-28 22:07:17.176 TemplateApp[21515:1361241] Finished load of: file:///Users/cj/Library/Developer/CoreSimulator/Devices/7672CF2F-E02C-473F-ABE3-F99907C8A817/data/Containers/Bundle/Application/78A86EE9-6BCD-4B0A-BE46-43010612309F/TemplateApp.app/www/index.html#/app/entertainment
+2015-08-28 22:07:29.054 TemplateApp[21515:1361604] Communications error: <OS_xpc_error: <error: 0x36075f4> { count = 1, contents =
+	"XPCErrorDescription" => <string: 0x360783c> { length = 22, contents = "Connection interrupted" }
+}>

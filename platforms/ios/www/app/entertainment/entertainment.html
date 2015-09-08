@@ -1,0 +1,14 @@
+<ion-view view-title="Entertainment">
+  <ion-content>
+
+    <!-- ion-list is a directive that lists stuff -->
+    <ion-list>
+      <!-- ion-item describes a single item in an ion-list -->
+      <!-- ng-repeat is a tool that uses the same conventions as -->
+      <!-- an enchanced for loop (foreach loop) -->
+      <ion-item ng-repeat="theater in ctrl.theaters">
+        {{theater}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

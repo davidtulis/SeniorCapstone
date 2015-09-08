@@ -1,0 +1,20 @@
+{
+  "name": "TemplateApp",
+  "app_id": "",
+  "gulpStartupTasks": [
+    "tsc",
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ],
+  "browsers": [
+    {
+      "platform": "android",
+      "browser": "crosswalk",
+      "version": "11.40.277.7"
+    }
+  ]
+}
