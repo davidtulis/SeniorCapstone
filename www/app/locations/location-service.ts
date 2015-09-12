@@ -161,13 +161,13 @@ module app.services {
                     location.address2 = item['address2'];
                     location.city = item['city'];
                     location.description = JSON.parse('"' + item['description'] + '"');
-                    location.id = item['itemid'];
-                    location.latitude = item['latitude'];
-                    location.longitude = item['longitude'];
+                    location.id = parseInt(item['itemid']);
+                    location.latitude = parseFloat(item['latitude']);
+                    location.longitude = parseFloat(item['longitude']);
                     location.name = JSON.parse('"' + item['Title'] + '"');
                     location.state = item['state'];
                     location.website = item['External Link'];
-                    location.zipCode = item['zipcode'];
+                    location.zipCode = parseInt(item['zipcode']);
 
                     _.forEach(this.districts, (district: models.District) => {
 

@@ -16,16 +16,27 @@ module app.controllers {
         constructor(private $state: ng.ui.IStateService,
                     private $stateParams: ng.ui.IStateParamsService,
                     private LocationService: services.ILocationService){
-            console.log($state);
-            console.log($stateParams);
+
             this.id = parseInt($stateParams['id']);
+
             LocationService.getById(this.id).then((data: models.Location) => {
-                this.location=data;
-                this.map={ center: { latitude: this.location.latitude, longitude: this.location.longitude}, zoom: 8 };
+
+                this.location = data;
+                this.map= {
+
+                    center: {
+
+                        latitude: this.location.latitude,
+                        longitude: this.location.longitude
+
+                    },
+
+                    zoom: 8
+                };
             });
 
-        }        
-        
+        }
+
     }
     
 }
