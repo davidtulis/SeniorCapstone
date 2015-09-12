@@ -1,31 +1,5 @@
 <ion-view view-title="{{ctrl.location.name}}">
     <ion-content>
-        <!--public id: number;
-        public latitude: number;
-        public longitude: number;
-        public address1: string;
-        public address2: string;
-        public city: string;
-        public state: string;
-        public zipCode: number;
-        public website: string;
-        public description: string;
-        public locationType: LocationType;
-        public district: District;
-        public name: string;-->
-        <!--<p>
-            Address: {{ctrl.location.address1}} <span ng-if="ctrl.location.address2.length > 0">{{ctrl.location.address2}}</span>
-                     <br />
-                     {{ctrl.location.city}}, {{ctrl.location.state}} {{ctrl.location.zipcode}}
-        </p>
-        <p>
-            Website: <a href="{{ctrl.location.website}}">{{ctrl.location.website}}</a>
-        </p>
-        <p>
-            About: <span ng-bind-html="ctrl.location.description"></span></p>
-        <div>
-            Location
-        </div>-->
         <div class="list">
             <label class="item item-input item-stacked-label item-text-wrap">
                 <span class="input-label">Address</span>
@@ -51,5 +25,6 @@
                 </p>
             </label>
         </div>
+        <ui-gmap-google-map center='ctrl.map.center' zoom='ctrl.map.zoom'></ui-gmap-google-map>
     </ion-content>
 </ion-view>

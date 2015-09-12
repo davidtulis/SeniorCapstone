@@ -3,7 +3,7 @@
 module app {
     'use strict';
 
-    var ngApp = angular.module('starter', ['ionic','ngCordova']);
+    var ngApp = angular.module('starter', ['ionic','ngCordova', 'uiGmapgoogle-maps']);
 
     // Services
     ngApp.service('LocationService', services.LocationService);

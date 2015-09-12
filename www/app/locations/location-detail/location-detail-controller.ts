@@ -11,6 +11,7 @@ module app.controllers {
         
         public location: app.models.Location;
         public id: number;
+        public map: Object;
         
         constructor(private $state: ng.ui.IStateService,
                     private $stateParams: ng.ui.IStateParamsService,
@@ -20,6 +21,7 @@ module app.controllers {
             LocationService.getById(_this.id).then(function(loc: models.Location) {
                 _this.location = loc;
                 console.log(_this.location);
+                _this.map={ center: { latitude: _this.location.latitude, longitude: _this.location.longitude}, zoom: 8 };
             }); 
         }        
         
