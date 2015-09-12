@@ -79,6 +79,12 @@
     },
     "cordova-ionic/plugins/keyboard.d.ts": {
       "commit": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    },
+    "lodash/lodash.d.ts": {
+      "commit": "859390c05b6dd2d96b2b1341ffb6c776e65f7c3c"
+    },
+    "angular-ui-router/angular-ui-router.d.ts": {
+      "commit": "859390c05b6dd2d96b2b1341ffb6c776e65f7c3c"
     }
   }
 }

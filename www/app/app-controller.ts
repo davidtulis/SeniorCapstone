@@ -2,7 +2,7 @@
 
 module app.controllers {
 
-    export class AppCtrl {
+    export class AppController {
         constructor(){
         	  
         }

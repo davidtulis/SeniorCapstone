@@ -1,157 +1,264 @@
-/// <reference path="./_app.ts" />
-var app;
-(function (app) {
-    var controllers;
-    (function (controllers) {
-        var AppCtrl = (function () {
-            function AppCtrl() {
-            }
-            return AppCtrl;
-        })();
-        controllers.AppCtrl = AppCtrl;
-    })(controllers = app.controllers || (app.controllers = {}));
-})(app || (app = {}));
-/// <reference path="./_app.ts" />
 /**
- * Created by cjcoffey on 3/20/2015.
+ * Created by john on 9/11/15.
  */
+/// <reference path="../_app.ts" />
 var app;
 (function (app) {
     var services;
     (function (services) {
         'use strict';
-        var AppService = (function () {
-            function AppService($ionicPlatform, $q) {
-                this.$ionicPlatform = $ionicPlatform;
+        var LocationService = (function () {
+            function LocationService($q, $http) {
                 this.$q = $q;
+                this.$http = $http;
+                this.districts = [];
+                this.locationTypes = [];
+                this.apiEndpoint = 'http://www.downtownchattanooga.org/feeds/mapdata.json.html';
+                this.districts.push({ id: 0, name: 'Bluff View', locations: [] });
+                this.districts.push({ id: 1, name: 'City Center', locations: [] });
+                this.districts.push({ id: 2, name: 'MLK/UTC', locations: [] });
+                this.districts.push({ id: 3, name: 'Northshore', locations: [] });
+                this.districts.push({ id: 4, name: 'Riverfront', locations: [] });
+                this.districts.push({ id: 5, name: 'Southside', locations: [] });
+                this.locationTypes.push({ id: 0, name: 'Entertainment', locations: [] });
+                this.locationTypes.push({ id: 1, name: 'Restaurant', locations: [] });
+                this.locationTypes.push({ id: 2, name: 'Shop', locations: [] });
+                this.locationTypes.push({ id: 3, name: 'Default', locations: [] });
             }
-            return AppService;
+            LocationService.prototype.getByDistrict = function (districtId) {
+                var _this = this;
+                var deferred = this.$q.defer();
+                this.loadData().then(function () {
+                    deferred.resolve(_this.districts[districtId].locations);
+                });
+                return deferred.promise;
+            };
+            LocationService.prototype.getById = function (locationId) {
+                var deferred = this.$q.defer();
+                var result;
+                this.loadData().then(function (locations) {
+                    _.forEach(locations, function (location) {
+                        if (location.id === locationId) {
+                            result = location;
+                        }
+                    });
+                    deferred.resolve(result);
+                });
+                return deferred.promise;
+            };
+            LocationService.prototype.getByLocationType = function (locationTypeId) {
+                var _this = this;
+                var deferred = this.$q.defer();
+                this.loadData().then(function () {
+                    deferred.resolve(_this.locationTypes[locationTypeId].locations);
+                });
+                return deferred.promise;
+            };
+            LocationService.prototype.getDistrict = function (districtId) {
+                var _this = this;
+                var deferred = this.$q.defer();
+                this.loadData().then(function () {
+                    deferred.resolve(_this.districts[districtId]);
+                });
+                return deferred.promise;
+            };
+            LocationService.prototype.getDistricts = function () {
+                var _this = this;
+                var deferred = this.$q.defer();
+                this.loadData().then(function () {
+                    deferred.resolve(_this.districts);
+                });
+                return deferred.promise;
+            };
+            LocationService.prototype.getLocationType = function (locationTypeId) {
+                var _this = this;
+                var deferred = this.$q.defer();
+                this.loadData().then(function () {
+                    deferred.resolve(_this.locationTypes[locationTypeId]);
+                });
+                return deferred.promise;
+            };
+            LocationService.prototype.getLocationTypes = function () {
+                var _this = this;
+                var deferred = this.$q.defer();
+                this.loadData().then(function () {
+                    deferred.resolve(_this.locationTypes);
+                });
+                return deferred.promise;
+            };
+            LocationService.prototype.loadData = function () {
+                var _this = this;
+                var deferred = this.$q.defer();
+                var locations = [];
+                this.$http.get(this.apiEndpoint).then(function (response) {
+                    _.forEach(_this.districts, function (district) {
+                        district.locations = [];
+                    });
+                    _.forEach(_this.locationTypes, function (locationType) {
+                        locationType.locations = [];
+                    });
+                    var json = JSON.parse(response.data.slice(15, response.data.length - 2));
+                    _.forEach(json['items'], function (item) {
+                        var location = new app.models.Location();
+                        location.address1 = item['address1'];
+                        location.address2 = item['address2'];
+                        location.city = item['city'];
+                        location.description = JSON.parse('"' + item['description'] + '"');
+                        location.id = item['itemid'];
+                        location.latitude = item['latitude'];
+                        location.longitude = item['longitude'];
+                        location.name = JSON.parse('"' + item['Title'] + '"');
+                        location.state = item['state'];
+                        location.website = item['External Link'];
+                        location.zipCode = item['zipcode'];
+                        _.forEach(_this.districts, function (district) {
+                            if (district.name === item['Subtitle']) {
+                                location.district = district;
+                                district.locations.push(location);
+                            }
+                        });
+                        switch (item['url'].split('/')[2].split('-')[0]) {
+                            case 'arts':
+                                location.locationType = _this.locationTypes[0];
+                                _this.locationTypes[0].locations.push(location);
+                                break;
+                            case 'food':
+                                location.locationType = _this.locationTypes[1];
+                                _this.locationTypes[1].locations.push(location);
+                                break;
+                            case 'shopping':
+                                location.locationType = _this.locationTypes[2];
+                                _this.locationTypes[2].locations.push(location);
+                                break;
+                            case 'retail':
+                                location.locationType = _this.locationTypes[2];
+                                _this.locationTypes[2].locations.push(location);
+                                break;
+                            default:
+                                location.locationType = _this.locationTypes[3];
+                                _this.locationTypes[3].locations.push(location);
+                        }
+                        locations.push(location);
+                    });
+                    deferred.resolve(locations);
+                });
+                return deferred.promise;
+            };
+            return LocationService;
         })();
-        services.AppService = AppService;
+        services.LocationService = LocationService;
     })(services = app.services || (app.services = {}));
-})(app || (app = {}));
-/// <reference path="../_app.ts" />
-var app;
-(function (app) {
-    var controllers;
-    (function (controllers) {
-        var EntertainmentController = (function () {
-            function EntertainmentController() {
-                this.filter = "";
-                this.districts = [
-                    '',
-                    'Northshore',
-                    'Riverfront',
-                    'Bluff View',
-                    'City Center',
-                    'MLK',
-                    'Southside'
-                ];
-                this.theaters = [
-                    { 'dist': 'Northshore', 'name': 'Chattanooga Theatre Centre' },
-                    { 'dist': 'Riverfront', 'name': 'Rhythm & Brews' },
-                    { 'dist': 'Riverfront', 'name': 'Tennessee Aquarium' },
-                    { 'dist': 'Bluff View', 'name': 'Tennessee Riverwalk' },
-                    { 'dist': 'Bluff View', 'name': 'Hunter Museum of Art' },
-                    { 'dist': 'City Center', 'name': 'Tivoli Theare' },
-                    { 'dist': 'MLK', 'name': 'JJ\'s Bohemia' },
-                    { 'dist': 'MLK', 'name': 'Lindsay Street Hall' },
-                    { 'dist': 'Southside', 'name': 'Finley Stadium' },
-                    { 'dist': 'Southside', 'name': 'Southside Social' },
-                    { 'dist': 'Southside', 'name': 'Track 29' }
-                ];
-            }
-            return EntertainmentController;
-        })();
-        controllers.EntertainmentController = EntertainmentController;
-    })(controllers = app.controllers || (app.controllers = {}));
-})(app || (app = {}));
-/// <reference path="../_app.ts" />
-var app;
-(function (app) {
-    var controllers;
-    (function (controllers) {
-        var ShopController = (function () {
-            function ShopController() {
-                this.shops = [
-                    "Trek Bikes",
-                    "Salon place",
-                    "Whatever"
-                ];
-            }
-            return ShopController;
-        })();
-        controllers.ShopController = ShopController;
-    })(controllers = app.controllers || (app.controllers = {}));
-})(app || (app = {}));
-/// <reference path="../_app.ts" />
-var app;
-(function (app) {
-    var controllers;
-    (function (controllers) {
-        var RestaurantController = (function () {
-            function RestaurantController() {
-                this.restaurants = [
-                    "Taco Mamacita",
-                    "Whole Foods",
-                    "Your mom's"
-                ];
-            }
-            return RestaurantController;
-        })();
-        controllers.RestaurantController = RestaurantController;
-    })(controllers = app.controllers || (app.controllers = {}));
 })(app || (app = {}));
 /// <reference path="./_app.ts" />
 var app;
 (function (app) {
-    var AppConfig = (function () {
-        function AppConfig() {
-            this.isMockMode = true;
-            this.isDeveloperMode = false;
-            this.systemTimerInSec = 21;
-            this.serviceTimerInSeconds = 60 * 5;
-            this.screenLockTimeoutInMin = 20; //20 minutes
-            this.events = {
-                serviceTick: 'service-tick',
-                uiTick: 'ui-tick'
+    var controllers;
+    (function (controllers) {
+        var AppController = (function () {
+            function AppController() {
+            }
+            return AppController;
+        })();
+        controllers.AppController = AppController;
+    })(controllers = app.controllers || (app.controllers = {}));
+})(app || (app = {}));
+/**
+ * Created by john on 9/11/15.
+ */
+/// <reference path="../../_app.ts" />
+var app;
+(function (app) {
+    var controllers;
+    (function (controllers) {
+        'use strict';
+        var LocationsListController = (function () {
+            function LocationsListController(LocationService, $state) {
+                var _this = this;
+                this.LocationService = LocationService;
+                this.$state = $state;
+                LocationService.getLocationType($state.params['locationTypeId']).then(function (data) {
+                    _this.locationType = data;
+                    _this.locations = data.locations;
+                });
+                LocationService.getDistricts().then(function (data) {
+                    _this.districts = data;
+                });
+            }
+            LocationsListController.prototype.filterLocations = function () {
+                if (this.districtFilter) {
+                    this.locations = _.intersection(this.locationType.locations, this.districtFilter.locations);
+                }
+                else {
+                    this.locations = this.locationType.locations;
+                }
             };
-            this.const = {};
-        }
-        Object.defineProperty(AppConfig.prototype, "refreshMinsRealtimeMeterdata", {
-            get: function () {
-                return 1;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(AppConfig.prototype, "refreshMinsDailyMeterdata", {
-            get: function () {
-                return 720;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(AppConfig.prototype, "isDevice", {
-            get: function () {
-                return !!window.cordova;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(AppConfig.prototype, "hoursToShowInChart", {
-            get: function () {
-                return 6;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        return AppConfig;
-    })();
-    app.AppConfig = AppConfig;
-    var config = new AppConfig();
+            return LocationsListController;
+        })();
+        controllers.LocationsListController = LocationsListController;
+    })(controllers = app.controllers || (app.controllers = {}));
+})(app || (app = {}));
+/**
+ * Created by john on 9/8/15.
+ */
+/// <reference path="../_app.ts" />
+var app;
+(function (app) {
+    var models;
+    (function (models) {
+        'use strict';
+        var District = (function () {
+            function District() {
+            }
+            return District;
+        })();
+        models.District = District;
+    })(models = app.models || (app.models = {}));
+})(app || (app = {}));
+/**
+ * Created by john on 9/11/15.
+ */
+/// <reference path="../_app.ts" />
+var app;
+(function (app) {
+    var models;
+    (function (models) {
+        'use strict';
+        var Location = (function () {
+            function Location() {
+            }
+            return Location;
+        })();
+        models.Location = Location;
+    })(models = app.models || (app.models = {}));
+})(app || (app = {}));
+/**
+ * Created by john on 9/11/15.
+ */
+/// <reference path="../_app.ts" />
+var app;
+(function (app) {
+    var models;
+    (function (models) {
+        'use strict';
+        var LocationType = (function () {
+            function LocationType() {
+            }
+            return LocationType;
+        })();
+        models.LocationType = LocationType;
+    })(models = app.models || (app.models = {}));
+})(app || (app = {}));
+/// <reference path="./_app.ts" />
+var app;
+(function (app) {
     'use strict';
-    angular.module('starter', ['ionic', 'ngCordova']).value('config', config).constant('_', _).service("appService", app.services.AppService).controller("AppCtrl", app.controllers.AppCtrl).controller("EntertainmentController", app.controllers.EntertainmentController).controller("ShopController", app.controllers.ShopController).controller("RestaurantController", app.controllers.RestaurantController).run(function ($ionicPlatform) {
+    var ngApp = angular.module('starter', ['ionic', 'ngCordova']);
+    // Services
+    ngApp.service('LocationService', app.services.LocationService);
+    // Controllers
+    ngApp.controller("AppController", app.controllers.AppController);
+    ngApp.controller("LocationsListController", app.controllers.LocationsListController);
+    ngApp.run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -159,40 +266,54 @@ var app;
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
                 cordova.plugins.Keyboard.disableScroll(true);
             }
-            if (window.StatusBar) {
-                window.StatusBar.styleDefault();
+            if (window["StatusBar"]) {
+                window["StatusBar"].styleDefault();
             }
         });
-    }).config(function ($stateProvider, $urlRouterProvider) {
+    });
+    ngApp.config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider.state('app', {
             url: "/app",
             abstract: true,
             templateUrl: "app/menu.html",
-            controller: 'AppCtrl'
-        }).state('app.entertainment', {
+            controller: 'AppController',
+            controllerAs: 'ctrl'
+        });
+        $stateProvider.state('app.entertainment', {
             url: "/entertainment",
+            params: {
+                locationTypeId: 0
+            },
             views: {
                 'menuContent': {
-                    templateUrl: "app/entertainment/entertainment.html",
-                    controller: 'EntertainmentController',
+                    templateUrl: "app/locations/locations-list/locations-list.html",
+                    controller: 'LocationsListController',
                     controllerAs: 'ctrl'
                 }
             }
-        }).state('app.shops', {
-            url: "/shops",
-            views: {
-                'menuContent': {
-                    templateUrl: "app/shop/shop.html",
-                    controller: 'ShopController',
-                    controllerAs: 'ctrl'
-                }
-            }
-        }).state('app.restaurants', {
+        });
+        $stateProvider.state('app.restaurants', {
             url: "/restaurant",
+            params: {
+                locationTypeId: 1
+            },
             views: {
                 'menuContent': {
-                    templateUrl: "app/restaurant/restaurant.html",
-                    controller: 'RestaurantController',
+                    templateUrl: "app/locations/locations-list/locations-list.html",
+                    controller: 'LocationsListController',
+                    controllerAs: 'ctrl'
+                }
+            }
+        });
+        $stateProvider.state('app.shops', {
+            url: "/shops",
+            params: {
+                locationTypeId: 2
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "app/locations/locations-list/locations-list.html",
+                    controller: 'LocationsListController',
                     controllerAs: 'ctrl'
                 }
             }
@@ -202,11 +323,14 @@ var app;
     });
 })(app || (app = {}));
 /// <reference path="./typings/tsd.d.ts" />
-/// place new references here
+/// Services
+/// <reference path="./locations/location-service.ts" />
+/// Controllers
 /// <reference path="./app-controller.ts" />
-/// <reference path="./app-service.ts" />
-/// <reference path="./entertainment/entertainment-controller.ts" />
-/// <reference path="./shop/shop-controller.ts" />
-/// <reference path="./restaurant/restaurant-controller.ts" />
+/// <reference path="./locations/locations-list/locations-list-controller.ts" />
+/// Models
+/// <reference path="./models/district.ts" />
+/// <reference path="./models/location.ts" />
+/// <reference path="./models/location-type.ts" />
 /// <reference path="./app.ts" />
 //# sourceMappingURL=app.js.map

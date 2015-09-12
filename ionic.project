@@ -1,5 +1,5 @@
 {
-  "name": "TemplateApp",
+  "name": "Explore Chatt",
   "app_id": "",
   "gulpStartupTasks": [
     "tsc",

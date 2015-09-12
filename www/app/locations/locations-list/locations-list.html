@@ -1,0 +1,23 @@
+<ion-view view-title="{{ctrl.locationType.name}}">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Districts
+                </div>
+                <select ng-model="ctrl.districtFilter"
+                        ng-options="district.name for district in ctrl.districts"
+                        ng-change="ctrl.filterLocations()">
+                    <option value="" selected>Select a District</option>
+                </select>
+            </label>
+            <!-- ion-list is a directive that lists stuff -->
+            <ion-list>
+                <!-- ion-item describes a single item in an ion-list -->
+                <!-- ng-repeat is a tool that uses the same conventions as -->
+                <!-- an enchanced for loop (foreach loop) -->
+                <ion-item ng-repeat="location in ctrl.locations | orderBy: 'name'" ng-bind-html="location.name"></ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

@@ -300,6 +300,11 @@ module.exports = [
         "clobbers": [
             "window.StatusBar"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-whitelist/whitelist.js",
+        "id": "cordova-plugin-whitelist.whitelist",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -316,7 +321,8 @@ module.exports.metadata =
     "cordova-plugin-inappbrowser": "1.0.1",
     "cordova-plugin-media-capture": "1.0.1",
     "cordova-plugin-splashscreen": "2.1.0",
-    "cordova-plugin-statusbar": "1.0.1"
+    "cordova-plugin-statusbar": "1.0.1",
+    "cordova-plugin-whitelist": "1.1.1-dev"
 }
 // BOTTOM OF METADATA
 });

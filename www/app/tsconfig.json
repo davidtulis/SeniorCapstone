@@ -28,9 +28,9 @@
         "./entertainment/entertainment-controller.ts",
         "./restaurant/restaurant-controller.ts",
         "./shop/shop-controller.ts",
+        "./typings/angularjs/angular.d.ts",
         "./typings/angularjs/angular-localstorage.d.ts",
         "./typings/angularjs/angular-mocks.d.ts",
-        "./typings/angularjs/angular.d.ts",
         "./typings/cordova-ionic/cordova-ionic.d.ts",
         "./typings/cordova-ionic/plugins/keyboard.d.ts",
         "./typings/cordova/cordova.d.ts",
@@ -55,7 +55,6 @@
         "./typings/cordova/plugins/Vibration.d.ts",
         "./typings/cordova/plugins/WebSQL.d.ts",
         "./typings/jquery/jquery.d.ts",
-        "./typings/lodash/lodash.d.ts",
         "./typings/moment/moment.d.ts",
         "./typings/tsd.d.ts"
     ]

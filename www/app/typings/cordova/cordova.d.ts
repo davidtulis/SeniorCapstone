@@ -6,7 +6,6 @@
 // Copyright (c) Microsoft Open Technologies, Inc.
 // Licensed under the MIT license.
 
-/// <reference path="plugins/AppVersion.d.ts"/>
 /// <reference path="plugins/BatteryStatus.d.ts"/>
 /// <reference path="plugins/Camera.d.ts"/>
 /// <reference path="plugins/Contacts.d.ts"/>
