@@ -5,6 +5,8 @@ module app {
 
     var ngApp = angular.module('starter', ['ionic','ngCordova', 'uiGmapgoogle-maps']);
 
+    console.log(window);
+
     // Services
     ngApp.service('LocationService', services.LocationService);
 

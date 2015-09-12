@@ -61,9 +61,9 @@ module app.services {
             this.loadData().then((locations) => {
 
                 _.forEach(locations, (location: models.Location) => {
-
+                    
                     if(location.id === locationId) {
-
+                        
                         result = location;
                     }
                 });
