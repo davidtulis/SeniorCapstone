@@ -16,7 +16,12 @@
                 <!-- ion-item describes a single item in an ion-list -->
                 <!-- ng-repeat is a tool that uses the same conventions as -->
                 <!-- an enchanced for loop (foreach loop) -->
-                <ion-item ng-repeat="location in ctrl.locations | orderBy: 'name'" ng-bind-html="location.name"></ion-item>
+                <ion-item class="item-icon-right" 
+                          ng-repeat="location in ctrl.locations | orderBy: 'name'"
+                          ui-sref="app.details">
+                    {{location.name}}
+                    <i class="icon ion-chevron-right"></i>
+                </ion-item>
             </ion-list>
         </div>
     </ion-content>

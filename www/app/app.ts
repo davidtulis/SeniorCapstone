@@ -75,6 +75,15 @@ module app {
                     controllerAs: 'ctrl'
                 }
             }
+        })
+        
+        $stateProvider.state('app.details', {
+            url: "/details/:id",
+            views: {
+                'menuContent': {
+                    templateUrl: "app/locations/location-detail/location-detail.html"
+                }
+            }
         });
 
         // if none of the above states are matched, use this as the fallback

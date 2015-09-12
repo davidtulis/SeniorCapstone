@@ -1,5 +1,5 @@
 {
-  "name": "TemplateApp",
+  "name": "RiverCityApp",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#master",
