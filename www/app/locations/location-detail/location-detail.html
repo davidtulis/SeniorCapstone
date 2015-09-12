@@ -1,6 +1,55 @@
-<ion-view view-title="">
+<ion-view view-title="{{ctrl.location.name}}">
     <ion-content>
-        <h1>Hi bob marley</h1>
-        <p>Location id: {{ctrl.id}}</p>
+        <!--public id: number;
+        public latitude: number;
+        public longitude: number;
+        public address1: string;
+        public address2: string;
+        public city: string;
+        public state: string;
+        public zipCode: number;
+        public website: string;
+        public description: string;
+        public locationType: LocationType;
+        public district: District;
+        public name: string;-->
+        <!--<p>
+            Address: {{ctrl.location.address1}} <span ng-if="ctrl.location.address2.length > 0">{{ctrl.location.address2}}</span>
+                     <br />
+                     {{ctrl.location.city}}, {{ctrl.location.state}} {{ctrl.location.zipcode}}
+        </p>
+        <p>
+            Website: <a href="{{ctrl.location.website}}">{{ctrl.location.website}}</a>
+        </p>
+        <p>
+            About: <span ng-bind-html="ctrl.location.description"></span></p>
+        <div>
+            Location
+        </div>-->
+        <div class="list">
+            <label class="item item-input item-stacked-label item-text-wrap">
+                <span class="input-label">Address</span>
+                <p>{{ctrl.location.address1}} 
+                   <span ng-if="ctrl.location.address2.length > 0">{{ctrl.location.address2}}</span>
+                   <br />
+                   {{ctrl.location.city}}, {{ctrl.location.state}} {{ctrl.location.zipcode}}</p>
+            </label>
+            <label class="item item-input item-stacked-label item-text-wrap">
+                <span class="input-label">Website</span>
+                <p>
+                    <a href="{{ctrl.location.website}}">{{ctrl.location.website}}</a>
+                </p>
+            </label>
+            <label class="item item-input item-stacked-label item-text-wrap">
+                <span class="input-label">About</span>
+                <p ng-bind-html="ctrl.location.description"></p>
+            </label>
+            <label class="item item-input item-stacked-label item-text-wrap">
+                <span class="input-label">Location</span>
+                <p>
+                    
+                </p>
+            </label>
+        </div>
     </ion-content>
 </ion-view>

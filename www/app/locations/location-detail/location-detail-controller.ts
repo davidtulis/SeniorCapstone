@@ -15,9 +15,12 @@ module app.controllers {
         constructor(private $state: ng.ui.IStateService,
                     private $stateParams: ng.ui.IStateParamsService,
                     private LocationService: services.ILocationService){
-            console.log($state);
-            console.log($stateParams);
-            this.id = $stateParams['id'];
+            var _this = this;
+            _this.id = parseInt($stateParams['id']);
+            LocationService.getById(_this.id).then(function(loc: models.Location) {
+                _this.location = loc;
+                console.log(_this.location);
+            }); 
         }        
         
     }
