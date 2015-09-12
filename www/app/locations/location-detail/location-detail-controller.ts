@@ -23,7 +23,8 @@ module app.controllers {
                 console.log(_this.location);
                 _this.map={ center: { latitude: _this.location.latitude, longitude: _this.location.longitude}, zoom: 8 };
             }); 
-        }        
+        }
+        initMap();
         
     }
     
