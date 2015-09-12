@@ -31,6 +31,7 @@ module app {
             if(window["StatusBar"]) {
 
                 window["StatusBar"].styleDefault();
+                window["StatusBar"].overlaysWebView(false);
             }
         });
     });
