@@ -12,6 +12,7 @@ module app {
 
     // Controllers
     ngApp.controller("AppController", controllers.AppController);
+    ngApp.controller("HomeController", controllers.HomeController);
     ngApp.controller("LocationsListController", controllers.LocationsListController);
     ngApp.controller("LocationDetailsController", controllers.LocationDetailsController);
 
@@ -41,6 +42,12 @@ module app {
             templateUrl: "app/menu.html",
             controller: 'AppController',
             controllerAs: 'ctrl'
+        });
+        
+        $stateProvider.state('home', {
+            url: "/home",
+            templateUrl: "app/home/home.html",
+            controller: 'HomeController'
         });
 
         $stateProvider.state('app.entertainment', {
@@ -97,6 +104,6 @@ module app {
         });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/entertainment');
+        $urlRouterProvider.otherwise('/home');
     });
 }
