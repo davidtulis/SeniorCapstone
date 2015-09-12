@@ -11,6 +11,7 @@ module app {
     // Controllers
     ngApp.controller("AppController", controllers.AppController);
     ngApp.controller("LocationsListController", controllers.LocationsListController);
+    ngApp.controller("LocationDetailsController", controllers.LocationDetailsController);
 
     ngApp.run(function($ionicPlatform) {
         $ionicPlatform.ready(function() {
@@ -81,7 +82,9 @@ module app {
             url: "/details/:id",
             views: {
                 'menuContent': {
-                    templateUrl: "app/locations/location-detail/location-detail.html"
+                    templateUrl: "app/locations/location-detail/location-detail.html",
+                    controller: 'LocationDetailsController',
+                    controllerAs: 'ctrl'
                 }
             }
         });
