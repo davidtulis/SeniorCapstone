@@ -24,8 +24,8 @@ module app.controllers {
                 this.map={ center: { latitude: this.location.latitude, longitude: this.location.longitude}, zoom: 8 };
             });
 
-        }        
-        
+        }
+        initMap();
     }
     
 }
