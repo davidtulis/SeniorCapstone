@@ -1,8 +1,5 @@
 <ion-view view-title="{{ctrl.location.name}}">
     <ion-content>
-        <div>
-            <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
-        </div>
         <div class="list">
             <label class="item item-input item-stacked-label item-text-wrap">
                 <span class="input-label">Address</span>
@@ -23,9 +20,9 @@
             </label>
             <label class="item item-input item-stacked-label item-text-wrap">
                 <span class="input-label">Location</span>
-                <p>
-                    
-                </p>
+                <div>
+                    <ui-gmap-google-map center='ctrl.map.center' zoom='ctrl.map.zoom'></ui-gmap-google-map>
+                </div>
             </label>
         </div>
     </ion-content>

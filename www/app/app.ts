@@ -34,12 +34,19 @@ module app {
         });
     });
 
-    ngApp.config(function($stateProvider, $urlRouterProvider) {
+    ngApp.config(function($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
         $stateProvider.state('app', {
             url: "/app",
             abstract: true,
             templateUrl: "app/menu.html",
             controller: 'AppController',
+            controllerAs: 'ctrl'
+        });
+        
+        $stateProvider.state('home', {
+            url: "/home",
+            templateUrl: "app/home/home.html",
+            controller: 'HomeController',
             controllerAs: 'ctrl'
         });
 
@@ -97,7 +104,7 @@ module app {
         });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/entertainment');
+        $urlRouterProvider.otherwise('/home');
 
         uiGmapGoogleMapApiProvider['configure']({
             key: 'AIzaSyC4KlUuej_XNDxUr3g1_KM1izg4ARytjTk',
