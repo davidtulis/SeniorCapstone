@@ -95,7 +95,7 @@ module app {
                     controllerAs: 'ctrl'
                 }
             }
-        })
+        });
         
         $stateProvider.state('app.details', {
             url: "/details/:id",
@@ -110,10 +110,5 @@ module app {
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/home');
-
-        // uiGmapGoogleMapApiProvider['configure']({
-        //     key: 'AIzaSyC4KlUuej_XNDxUr3g1_KM1izg4ARytjTk',
-        //     libraries: 'weather,geometry,visualization'
-        // });
     });
 }
