@@ -139,7 +139,7 @@ module app.services {
             var deferred = this.$q.defer();
             var locations: models.Location[] = [];
 
-            this.$http.get(this.apiEndpoint).then((response) => {
+            this.$http.get(this.apiEndpoint, { cache: true }).then((response) => {
 
                 _.forEach(this.districts, (district: models.District) => {
 

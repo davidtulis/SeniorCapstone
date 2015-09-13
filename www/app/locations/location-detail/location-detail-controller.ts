@@ -33,7 +33,7 @@ module app.controllers {
 
                 ctrl.map = new google.maps.Map(target, mapOptions);
 
-                var marker = new google.maps.Marker({
+                new google.maps.Marker({
                     position: new google.maps.LatLng(ctrl.location.latitude, ctrl.location.longitude),
                     map: ctrl.map,
                     title: ctrl.location.name
