@@ -11,17 +11,20 @@ module app.controllers {
         
         public location: app.models.Location;
         public id: number;
-        public map: Object;
+        public map: google.maps.Map;
         
         constructor(private $state: ng.ui.IStateService,
                     private $stateParams: ng.ui.IStateParamsService,
                     private LocationService: services.ILocationService){
-            var _this = this;
-            _this.id = parseInt($stateParams['id']);
-            LocationService.getById(_this.id).then(function(loc: models.Location) {
-                _this.location = loc;
-                console.log(_this.location);
-                _this.map={ center: { latitude: _this.location.latitude, longitude: _this.location.longitude}, zoom: 8 };
+
+            var ctrl = this;
+            ctrl.id = parseInt($stateParams['id']);
+
+            LocationService.getById(ctrl.id).then(function(loc: models.Location) {
+
+                ctrl.location = loc;
+                ctrl.map = new google.maps.Map($('.google-map')[0]);
+                ctrl.map.setCenter({lat: ctrl.location.latitude, lng: ctrl.location.longitude});
             }); 
         }
     }
