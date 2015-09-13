@@ -31,12 +31,12 @@ module app {
                 window["StatusBar"].styleDefault();
                 window["StatusBar"].overlaysWebView(false);
             }
-            
-            
         });
     });
 
-    ngApp.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    ngApp.config(function($stateProvider: ng.ui.IStateProvider, 
+                          $urlRouterProvider: ng.ui.IUrlRouterProvider, 
+                          $ionicConfigProvider) {
         
         $ionicConfigProvider.backButton.text('').icon('ion-chevron-left').previousTitleText(false);
         
