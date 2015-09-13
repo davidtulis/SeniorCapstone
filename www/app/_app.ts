@@ -5,6 +5,7 @@
 
 /// Controllers
 /// <reference path="./app-controller.ts" />
+/// <reference path="./home/home-controller.ts" />
 /// <reference path="./locations/locations-list/locations-list-controller.ts" />
 /// <reference path="./locations/location-detail/location-detail-controller.ts" />
 
