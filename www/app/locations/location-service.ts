@@ -49,6 +49,7 @@ module app.services {
 
                 deferred.resolve(this.districts[districtId].locations);
             }, (reason: ng.IHttpPromiseCallbackArg<any>) => {
+
                 deferred.reject(reason);
             });
 
@@ -72,6 +73,7 @@ module app.services {
 
                 deferred.resolve(result);
             }, (reason: ng.IHttpPromiseCallbackArg<any>) => {
+
                 deferred.reject(reason);
             });
 
@@ -86,6 +88,7 @@ module app.services {
 
                 deferred.resolve(this.locationTypes[locationTypeId].locations);
             }, (reason: ng.IHttpPromiseCallbackArg<any>) => {
+
                 deferred.reject(reason);
             });
 
@@ -100,6 +103,7 @@ module app.services {
 
                 deferred.resolve(this.districts[districtId]);
             }, (reason: ng.IHttpPromiseCallbackArg<any>) => {
+
                 deferred.reject(reason);
             });
 
@@ -114,6 +118,7 @@ module app.services {
 
                 deferred.resolve(this.districts);
             }, (reason: ng.IHttpPromiseCallbackArg<any>) => {
+
                 deferred.reject(reason);
             });
 
@@ -128,6 +133,7 @@ module app.services {
 
                 deferred.resolve(this.locationTypes[locationTypeId]);
             }, (reason: ng.IHttpPromiseCallbackArg<any>) => {
+
                 deferred.reject(reason);
             });
 
@@ -142,6 +148,7 @@ module app.services {
 
                 deferred.resolve(this.locationTypes);
             }, (reason: ng.IHttpPromiseCallbackArg<any>) => {
+
                 deferred.reject(reason);
             });
 
@@ -220,6 +227,7 @@ module app.services {
 
                 deferred.resolve(locations);
             }, (response: ng.IHttpPromiseCallbackArg<any>) => {
+
                 deferred.reject(response);
             });
 

@@ -17,27 +17,31 @@ module app.controllers {
         constructor(private LocationService: services.ILocationService,
                     private $state: ng.ui.IStateService,
                     private $ionicLoading,
-                    private $ionicPopup) {
+                    private $ionicPopup,
+                    private $q: ng.IQService) {
 
             this.showLoading(true);
 
-            LocationService.getLocationType($state.params['locationTypeId']).then((data: models.LocationType) => {
+            $q.all({
+                locationType: LocationService.getLocationType($state.params['locationTypeId']),
+                districts: LocationService.getDistricts()
+            }).then((data: Object) => {
 
-                this.locationType = data;
-                this.locations = data.locations;
+                this.locationType = <models.LocationType>data['locationType'];
+                this.locations = this.locationType.locations;
+                this.districts = <models.District[]>data['districts'];
                 this.showLoading(false);
+
             }, (reason: ng.IHttpPromiseCallbackArg<any>) => {
+
                 this.showLoading(false);
+
                 $ionicPopup.alert({
                     title: 'Sorry',
-                    template: 'Could not load locations'
+                    template: 'Could not load data'
                 });
+
                 console.log(reason);
-            });
-
-            LocationService.getDistricts().then((data: models.District[]) => {
-
-                this.districts = data;
             });
         }
 
@@ -52,8 +56,8 @@ module app.controllers {
             }
         }
 
-        private showLoading(yes: boolean) {
-            if (yes) {
+        private showLoading(isLoading: boolean) {
+            if (isLoading) {
                 this.$ionicLoading.show({
                     template: 'Loading locations<br /><br /><ion-spinner icon="android" class="spinner-royal"></ion-spinner>'
                 });

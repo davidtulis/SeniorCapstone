@@ -14,14 +14,18 @@ module app.controllers {
         public map: google.maps.Map;
 
         constructor(private $stateParams: ng.ui.IStateParamsService,
-                    private LocationService: services.ILocationService) {
+                    private LocationService: services.ILocationService,
+                    private $ionicLoading,
+                    private $ionicPopup) {
 
             var ctrl = this;
 
+            ctrl.showLoading(true);
             ctrl.id = parseInt($stateParams['id']);
 
-            LocationService.getById(ctrl.id).then(function(loc: models.Location) {
-                ctrl.location = loc;
+            LocationService.getById(ctrl.id).then((data: models.Location) => {
+
+                ctrl.location = data;
 
                 var mapOptions = {
                     center: new google.maps.LatLng(ctrl.location.latitude, ctrl.location.longitude),
@@ -38,7 +42,29 @@ module app.controllers {
                     map: ctrl.map,
                     title: ctrl.location.name
                 });
+
+                ctrl.showLoading(false);
+            }, (reason: ng.IHttpPromiseCallbackArg<any>) => {
+
+                this.showLoading(false);
+
+                $ionicPopup.alert({
+                    title: 'Sorry',
+                    template: 'Could not load data'
+                });
+
+                console.log(reason);
             });
+        }
+
+        private showLoading(isLoading: boolean) {
+            if (isLoading) {
+                this.$ionicLoading.show({
+                    template: 'Loading location<br /><br /><ion-spinner icon="android" class="spinner-royal"></ion-spinner>'
+                });
+            } else {
+                this.$ionicLoading.hide();
+            }
         }
     }
 
