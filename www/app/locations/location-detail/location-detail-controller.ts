@@ -15,17 +15,30 @@ module app.controllers {
         
         constructor(private $state: ng.ui.IStateService,
                     private $stateParams: ng.ui.IStateParamsService,
-                    private LocationService: services.ILocationService){
-            var _this = this;
-            _this.id = parseInt($stateParams['id']);
-            LocationService.getById(_this.id).then(function(loc: models.Location) {
-                _this.location = loc;
-                console.log(_this.location);
-                _this.map={ center: { latitude: _this.location.latitude, longitude: _this.location.longitude}, zoom: 8 };
+                    private LocationService: services.ILocationService,
+                    private uiGmapGoogleMapApi: Object){
+
+            var ctrl = this;
+            ctrl.id = parseInt($stateParams['id']);
+            LocationService.getById(ctrl.id).then((data: models.Location) => {
+
+                ctrl.location = data;
+                ctrl.map = {
+                    show: true,
+                    center: {
+
+                        latitude: ctrl.location.latitude,
+                        longitude: ctrl.location.longitude
+                    },
+
+                    zoom: 8
+                };
+
+                (<ng.IPromise<any>>ctrl.uiGmapGoogleMapApi).then((maps) => {
+                    console.log(maps);
+                });
             }); 
         }
-        initMap();
-        
     }
     
 }

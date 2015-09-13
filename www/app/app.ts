@@ -5,15 +5,13 @@ module app {
 
     var ngApp = angular.module('starter', ['ionic','ngCordova', 'uiGmapgoogle-maps']);
 
-    console.log(window);
-
     // Services
     ngApp.service('LocationService', services.LocationService);
 
     // Controllers
-    ngApp.controller("AppController", controllers.AppController);
-    ngApp.controller("LocationsListController", controllers.LocationsListController);
-    ngApp.controller("LocationDetailsController", controllers.LocationDetailsController);
+    ngApp.controller('AppController', controllers.AppController);
+    ngApp.controller('LocationsListController', controllers.LocationsListController);
+    ngApp.controller('LocationDetailsController', controllers.LocationDetailsController);
 
     ngApp.run(function($ionicPlatform) {
 
@@ -27,30 +25,33 @@ module app {
                 cordova.plugins.Keyboard.disableScroll(true);
             }
 
-            if(window["StatusBar"]) {
+            if(window['StatusBar']) {
 
-                window["StatusBar"].styleDefault();
+                window['StatusBar'].styleDefault();
             }
         });
     });
 
-    ngApp.config(function($stateProvider, $urlRouterProvider) {
+    ngApp.config(($stateProvider: ng.ui.IStateProvider,
+                  $urlRouterProvider: ng.ui.IUrlRouterProvider,
+                  uiGmapGoogleMapApiProvider: Object) => {
+
         $stateProvider.state('app', {
-            url: "/app",
+            url: '/app',
             abstract: true,
-            templateUrl: "app/menu.html",
+            templateUrl: 'app/menu.html',
             controller: 'AppController',
             controllerAs: 'ctrl'
         });
 
         $stateProvider.state('app.entertainment', {
-            url: "/entertainment",
+            url: '/entertainment',
             params: {
                 locationTypeId: 0
             },
             views: {
                 'menuContent': {
-                    templateUrl: "app/locations/locations-list/locations-list.html",
+                    templateUrl: 'app/locations/locations-list/locations-list.html',
                     controller: 'LocationsListController',
                     controllerAs: 'ctrl'
                 }
@@ -58,13 +59,13 @@ module app {
         });
 
         $stateProvider.state('app.restaurants', {
-            url: "/restaurant",
+            url: '/restaurant',
             params: {
                 locationTypeId: 1
             },
             views: {
                 'menuContent': {
-                    templateUrl: "app/locations/locations-list/locations-list.html",
+                    templateUrl: 'app/locations/locations-list/locations-list.html',
                     controller: 'LocationsListController',
                     controllerAs: 'ctrl'
                 }
@@ -72,13 +73,13 @@ module app {
         });
 
         $stateProvider.state('app.shops', {
-            url: "/shops",
+            url: '/shops',
             params: {
                 locationTypeId: 2
             },
             views: {
                 'menuContent': {
-                    templateUrl: "app/locations/locations-list/locations-list.html",
+                    templateUrl: 'app/locations/locations-list/locations-list.html',
                     controller: 'LocationsListController',
                     controllerAs: 'ctrl'
                 }
@@ -86,10 +87,10 @@ module app {
         })
         
         $stateProvider.state('app.details', {
-            url: "/details/:id",
+            url: '/details/:id',
             views: {
                 'menuContent': {
-                    templateUrl: "app/locations/location-detail/location-detail.html",
+                    templateUrl: 'app/locations/location-detail/location-detail.html',
                     controller: 'LocationDetailsController',
                     controllerAs: 'ctrl'
                 }
@@ -98,5 +99,10 @@ module app {
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/entertainment');
+
+        uiGmapGoogleMapApiProvider['configure']({
+            key: 'AIzaSyC4KlUuej_XNDxUr3g1_KM1izg4ARytjTk',
+            libraries: 'weather,geometry,visualization'
+        });
     });
 }
