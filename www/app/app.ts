@@ -31,10 +31,15 @@ module app {
                 window["StatusBar"].styleDefault();
                 window["StatusBar"].overlaysWebView(false);
             }
+            
+            
         });
     });
 
-    ngApp.config(function($stateProvider, $urlRouterProvider) {
+    ngApp.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+        
+        $ionicConfigProvider.backButton.text('').icon('ion-chevron-left').previousTitleText(false);
+        
         $stateProvider.state('app', {
             url: "/app",
             abstract: true,
