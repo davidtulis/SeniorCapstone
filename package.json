@@ -31,7 +31,8 @@
     "cordova-plugin-geolocation",
     "cordova-plugin-file-transfer",
     "cordova-plugin-file",
-    "cordova-plugin-splashscreen"
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-whitelist@1.0.0"
   ],
   "cordovaPlatforms": [
     "android",

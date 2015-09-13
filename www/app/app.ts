@@ -44,6 +44,13 @@ module app {
             controller: 'AppController',
             controllerAs: 'ctrl'
         });
+        
+        $stateProvider.state('home', {
+            url: "/home",
+            templateUrl: "app/home/home.html",
+            controller: 'HomeController',
+            controllerAs: 'ctrl'
+        });
 
         $stateProvider.state('app.entertainment', {
             url: "/entertainment",
