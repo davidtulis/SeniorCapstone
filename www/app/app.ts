@@ -3,7 +3,7 @@
 module app {
     'use strict';
 
-    var ngApp = angular.module('starter', ['ionic','ngCordova', 'uiGmapgoogle-maps']);
+    var ngApp = angular.module('starter', ['ionic','ngCordova']);
 
     // Services
     ngApp.service('LocationService', services.LocationService);
@@ -34,7 +34,7 @@ module app {
         });
     });
 
-    ngApp.config(function($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
+    ngApp.config(function($stateProvider, $urlRouterProvider) {
         $stateProvider.state('app', {
             url: "/app",
             abstract: true,
@@ -106,9 +106,9 @@ module app {
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/home');
 
-        uiGmapGoogleMapApiProvider['configure']({
-            key: 'AIzaSyC4KlUuej_XNDxUr3g1_KM1izg4ARytjTk',
-            libraries: 'weather,geometry,visualization'
-        });
+        // uiGmapGoogleMapApiProvider['configure']({
+        //     key: 'AIzaSyC4KlUuej_XNDxUr3g1_KM1izg4ARytjTk',
+        //     libraries: 'weather,geometry,visualization'
+        // });
     });
 }
