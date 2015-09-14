@@ -172,7 +172,11 @@ module app.services {
                     locationType.locations = [];
                 });
 
-                var json = JSON.parse((<string>response.data).slice(15, (<string>response.data).length - 2));
+                var parseResponse = (data: Object) => {
+                    return data;
+                };
+
+                var json = eval(<string>response.data);
 
                 _.forEach(json['items'], (item: Object) => {
 

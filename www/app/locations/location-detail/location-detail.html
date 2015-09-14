@@ -2,25 +2,24 @@
     <ion-nav-title>{{ctrl.location.name}}</ion-nav-title>
     <ion-content overflow-scroll="true">
         <div class="list">
-            <label class="item item-input item-stacked-label item-text-wrap">
+            <label class="item item-input item-stacked-label item-text-wrap" ng-if="ctrl.location.address1">
                 <span class="input-label">Address</span>
                 <p>{{ctrl.location.address1}} 
-                   <span ng-if="ctrl.location.address2.length > 0">{{ctrl.location.address2}}</span>
+                   <span ng-if="ctrl.location.address2">{{ctrl.location.address2}}</span>
                    <br />
                    {{ctrl.location.city}}, {{ctrl.location.state}} {{ctrl.location.zipcode}}</p>
             </label>
-            <label class="item item-input item-stacked-label item-text-wrap">
+            <label class="item item-input item-stacked-label item-text-wrap" ng-if="ctrl.location.website">
                 <span class="input-label">Website</span>
                 <p>
                     <a href="{{ctrl.location.website}}">{{ctrl.location.website}}</a>
                 </p>
             </label>
-            <label class="item item-input item-stacked-label item-text-wrap">
+            <label class="item item-input item-stacked-label item-text-wrap" ng-if="ctrl.location.description">
                 <span class="input-label">About</span>
                 <p ng-bind-html="ctrl.location.description"></p>
             </label>
         </div>
-        <h4>Location</h4>
         <div class="mapClass" data-tap-disabled="true"></div>
     </ion-content>
 </ion-view>
