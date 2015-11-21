@@ -9,8 +9,11 @@ module app.models {
 
     export class District {
 
-        public id: number;
-        public name: string;
-        public locations: models.Location[];
+        public static BLUFF_VIEW = 'bluff view';
+        public static CITY_CENTER = 'city center';
+        public static NORTHSHORE = 'northshore';
+        public static RIVERFRONT = 'riverfront';
+        public static SOUTHSIDE = 'southside';
+        public static UTC_MLK = 'UTC/MLK';
     }
 }

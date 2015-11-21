@@ -8,9 +8,8 @@ module app.models {
     'use strict';
 
     export class LocationType {
-
-        public id: number;
-        public name: string;
-        public locations: models.Location[];
+        public static RESTAURANTS = 'restaurants';
+        public static ENTERTAINMENT = 'entertainment';
+        public static SHOPS = 'shops';
     }
 }
