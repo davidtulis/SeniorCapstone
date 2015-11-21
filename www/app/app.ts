@@ -13,6 +13,7 @@ module app {
     ngApp.controller("HomeController", controllers.HomeController);
     ngApp.controller("LocationsListController", controllers.LocationsListController);
     ngApp.controller("LocationDetailsController", controllers.LocationDetailsController);
+    ngApp.controller("MapController", controllers.MapController);
 
     ngApp.run(function($ionicPlatform) {
 
@@ -103,6 +104,17 @@ module app {
                 'menuContent': {
                     templateUrl: "app/locations/location-detail/location-detail.html",
                     controller: 'LocationDetailsController',
+                    controllerAs: 'ctrl'
+                }
+            }
+        });
+        
+        $stateProvider.state('app.map', {
+            url: "/map",
+            views: {
+                'menuContent': {
+                    templateUrl: "app/map/map.html",
+                    controller: 'MapController',
                     controllerAs: 'ctrl'
                 }
             }
