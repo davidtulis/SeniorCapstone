@@ -4,6 +4,9 @@
 
 /// <reference path="../_app.ts" />
 
+
+// http://codepen.io/ionic/pen/uzngt?editors=001
+
 module app.controllers {
     'use strict';
 
