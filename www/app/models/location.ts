@@ -22,7 +22,7 @@ module app.models {
         public tags: string;
     }
 
-    export class SeverResponse {
+    export class ServerResponse {
         public Items: models.ServerData[];
     }
 
