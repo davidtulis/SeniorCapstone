@@ -17,12 +17,24 @@ module app.controllers {
 		public infowindow: google.maps.InfoWindow;
 		public marker: google.maps.Marker;
 		
-        constructor(
-			// private $compile: ng.ICompileService,
-			private $window: ng.IWindowService
-		) {
+        constructor(private LocationService: services.ILocationService,
+					private $ionicLoading) {
 			var ctrl = this;
-			ctrl.init();
+
+			ctrl.showLoading(true);
+
+			LocationService.getAll().then((response) => {
+				ctrl.init();
+				response.forEach((location) => {
+					new google.maps.Marker({
+						position: new google.maps.LatLng(location.latitude, location.longitude),
+						map: ctrl.map,
+						title: location.title
+					});
+				});
+
+				ctrl.showLoading(false);
+			});
 		}
 		
 		private init(): void {
@@ -36,9 +48,19 @@ module app.controllers {
 				mapTypeId: <number>google.maps.MapTypeId.ROADMAP
 			};
 
-			var target = document.querySelector(".mapClass");
+			var target = document.getElementById("chattanoogamap");
 			
 			ctrl.map = new google.maps.Map(target, mapOptions);
+		}
+
+		private showLoading(isLoading: boolean) {
+			if (isLoading) {
+				this.$ionicLoading.show({
+					template: 'Loading location<br /><br /><ion-spinner icon="android" class="spinner-royal"></ion-spinner>'
+				});
+			} else {
+				this.$ionicLoading.hide();
+			}
 		}
 	}
 }
