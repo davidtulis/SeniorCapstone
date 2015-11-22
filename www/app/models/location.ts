@@ -24,6 +24,7 @@ module app.models {
 
     export class ServerResponse {
         public Items: models.ServerData[];
+        public Item: models.ServerData[];
     }
 
     export class Location {

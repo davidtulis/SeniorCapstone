@@ -11,7 +11,7 @@ module app {
     // Controllers
     ngApp.controller("AppController", controllers.AppController);
     ngApp.controller("HomeController", controllers.HomeController);
-    ngApp.controller("LocationsListController", controllers.LocationsListController);
+    ngApp.controller("LocationListController", controllers.LocationListController);
     ngApp.controller("LocationDetailsController", controllers.LocationDetailsController);
     ngApp.controller("MapController", controllers.MapController);
 
@@ -55,44 +55,86 @@ module app {
             controller: 'HomeController',
             controllerAs: 'ctrl'
         });
-
-        $stateProvider.state('app.entertainment', {
-            url: "/entertainment",
+        
+        $stateProvider.state('app.bluffview', {
+            url: "/bluffview",
             params: {
-                locationTypeId: 0
+                district: models.District.BLUFF_VIEW
             },
             views: {
                 'menuContent': {
                     templateUrl: "app/locations/locations-list/locations-list.html",
-                    controller: 'LocationsListController',
+                    controller: 'LocationListController',
                     controllerAs: 'ctrl'
                 }
             }
         });
-
-        $stateProvider.state('app.restaurants', {
-            url: "/restaurant",
+        
+        $stateProvider.state('app.citycenter', {
+            url: "/citycenter",
             params: {
-                locationTypeId: 1
+                district: models.District.CITY_CENTER
             },
             views: {
                 'menuContent': {
                     templateUrl: "app/locations/locations-list/locations-list.html",
-                    controller: 'LocationsListController',
+                    controller: 'LocationListController',
                     controllerAs: 'ctrl'
                 }
             }
         });
-
-        $stateProvider.state('app.shops', {
-            url: "/shops",
+        
+        $stateProvider.state('app.northshore', {
+            url: "/northshore",
             params: {
-                locationTypeId: 2
+                district: models.District.NORTHSHORE
             },
             views: {
                 'menuContent': {
                     templateUrl: "app/locations/locations-list/locations-list.html",
-                    controller: 'LocationsListController',
+                    controller: 'LocationListController',
+                    controllerAs: 'ctrl'
+                }
+            }
+        });
+        
+        $stateProvider.state('app.riverfront', {
+            url: "/riverfront",
+            params: {
+                district: models.District.RIVERFRONT
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "app/locations/locations-list/locations-list.html",
+                    controller: 'LocationListController',
+                    controllerAs: 'ctrl'
+                }
+            }
+        });
+        
+        $stateProvider.state('app.southside', {
+            url: "/southside",
+            params: {
+                district: models.District.SOUTHSIDE
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "app/locations/locations-list/locations-list.html",
+                    controller: 'LocationListController',
+                    controllerAs: 'ctrl'
+                }
+            }
+        });
+        
+        $stateProvider.state('app.utcmlk', {
+            url: "/utcmlk",
+            params: {
+                district: models.District.UTC_MLK
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "app/locations/locations-list/locations-list.html",
+                    controller: 'LocationListController',
                     controllerAs: 'ctrl'
                 }
             }

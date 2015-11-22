@@ -35,7 +35,7 @@ module app.services {
         getById(id:number):ng.IPromise<models.Location> {
             var deferred = this.$q.defer<models.Location>();
 
-            this.$http.get<models.ServerResponse>(this.apiEndpoint, {itemid: id})
+            this.$http.get<models.ServerResponse>(this.apiEndpoint + "?itemid=" + id)
                 .success((response) => {
                     deferred.resolve(this.processResponse(response)[0]);
                 }).error((error) => {
@@ -47,9 +47,12 @@ module app.services {
 
         search(district?:string, searchTerm?:string):ng.IPromise<models.Location[]> {
             var deferred = this.$q.defer<models.Location[]>();
+            
+            if(!searchTerm) searchTerm = "";
 
-            this.$http.get<models.ServerResponse>(this.apiEndpoint, {n: district, s: searchTerm})
+            this.$http.get<models.ServerResponse>(this.apiEndpoint + "?n=" + district + "&s=" + searchTerm)
                 .success((response) => {
+                    console.log(response);
                     deferred.resolve(this.processResponse(response));
                 }).error((error) => {
                     deferred.reject(error);
@@ -61,10 +64,17 @@ module app.services {
         private processResponse(response:models.ServerResponse):models.Location[] {
             var locations:models.Location[] = [];
 
-            response.Items.forEach((item) => {
-                var location = new models.Location(item);
-                locations.push(location);
-            });
+            if(response.Items) {
+                response.Items.forEach((item) => {
+                    var location = new models.Location(item);
+                    locations.push(location);
+                });
+            } else {
+                response.Item.forEach((item) => {
+                    var location = new models.Location(item);
+                    locations.push(location);
+                });
+            }
 
             return locations;
         }

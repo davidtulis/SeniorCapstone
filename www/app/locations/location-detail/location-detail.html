@@ -1,5 +1,5 @@
 <ion-view can-swipe-back="false">
-    <ion-nav-title>{{ctrl.location.name}}</ion-nav-title>
+    <ion-nav-title>{{ctrl.location.title}}</ion-nav-title>
     <ion-content overflow-scroll="true">
         <div class="list">
             <label class="item item-input item-stacked-label item-text-wrap" ng-if="ctrl.location.address1">
@@ -14,10 +14,6 @@
                 <p>
                     <a href="{{ctrl.location.website}}">{{ctrl.location.website}}</a>
                 </p>
-            </label>
-            <label class="item item-input item-stacked-label item-text-wrap" ng-if="ctrl.location.description">
-                <span class="input-label">About</span>
-                <p ng-bind-html="ctrl.location.description"></p>
             </label>
         </div>
         <div class="mapClass" data-tap-disabled="true"></div>

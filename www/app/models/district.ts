@@ -9,11 +9,11 @@ module app.models {
 
     export class District {
 
-        public static BLUFF_VIEW = 'bluff view';
-        public static CITY_CENTER = 'city center';
-        public static NORTHSHORE = 'northshore';
-        public static RIVERFRONT = 'riverfront';
-        public static SOUTHSIDE = 'southside';
+        public static BLUFF_VIEW = 'Bluff View';
+        public static CITY_CENTER = 'City Center';
+        public static NORTHSHORE = 'Northshore';
+        public static RIVERFRONT = 'Riverfront';
+        public static SOUTHSIDE = 'Southside';
         public static UTC_MLK = 'UTC/MLK';
     }
 }

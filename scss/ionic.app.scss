@@ -20,12 +20,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 $royal: #3e3e7d !default;
 $balanced: #6aca85 !default;
-$Northshore: #0D9BD7 !default;
-$Riverfront: #9A57A2 !default;
-$CityCenter: #00A75C !default;
-$TheBig9: #FEC212 !default;
-$BluffView: #E61E25 !default;
-$Southside: #EF5282 !default;
+$northshore: #0D9BD7 !default;
+$riverfront: #9A57A2 !default;
+$citycenter: #00A75C !default;
+$utcmlk: #FEC212 !default;
+$bluffview: #E61E25 !default;
+$southside: #EF5282 !default;
 
 
 // Include all of Ionic
@@ -34,6 +34,36 @@ $Southside: #EF5282 !default;
 .mapClass {
 	height: 50%;
 	width: 100%;
+}
+
+.bluff-view {
+	background-color: $bluffview;
+	color: white;
+}
+
+.city-center {
+	background-color: $citycenter;
+	color: white;
+}
+
+.northshore {
+	background-color: $northshore;
+	color: white;
+}
+
+.riverfront {
+	background-color: $riverfront;
+	color: white;
+}
+
+.southside {
+	background-color: $southside;
+	color: white;
+}
+
+.utc-mlk {
+	background-color: $utcmlk;
+	color: white;
 }
 
 // .scroll-content, .scroll {
