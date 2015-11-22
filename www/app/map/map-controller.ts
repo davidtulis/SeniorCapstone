@@ -22,22 +22,23 @@ module app.controllers {
 			private $window: ng.IWindowService
 		) {
 			var ctrl = this;
-			google.maps.event.addDomListener($window, 'load', ctrl.init);
+			ctrl.init();
 		}
 		
 		private init(): void {
 			var ctrl = this;
 			
-			ctrl.latLng = new google.maps.LatLng(35.0456, 85.2672); //https://goo.gl/MRd87E
+			ctrl.latLng = new google.maps.LatLng(35.045719, -85.309629); //https://goo.gl/MRd87E
 			
-			ctrl.mapOptions = {
+			var mapOptions = {
 				center: ctrl.latLng,
-				zoom: 16,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
+				zoom: 12,
+				mapTypeId: <number>google.maps.MapTypeId.ROADMAP
 			};
+
+			var target = document.querySelector(".mapClass");
 			
-			ctrl.map = new google.maps.Map(document.getElementById("chattanoogamap"), ctrl.mapOptions);
-			
+			ctrl.map = new google.maps.Map(target, mapOptions);
 		}
 	}
 }
