@@ -10,8 +10,7 @@ module app.services {
     export interface ILocationService {
         getAll(): ng.IPromise<models.Location[]>;
         getById(id:number): ng.IPromise<models.Location>;
-        getByDistrict(district:string): ng.IPromise<models.Location[]>;
-        getByLocationType(locationType:string): ng.IPromise<models.Location[]>;
+        search(district?:string, searchTerm?:string): ng.IPromise<models.Location[]>;
     }
 
     export class LocationService implements ILocationService {
@@ -23,7 +22,7 @@ module app.services {
         getAll():ng.IPromise<models.Location[]> {
             var deferred = this.$q.defer<models.Location[]>();
 
-            this.$http.get<models.SeverResponse>(this.apiEndpoint)
+            this.$http.get<models.ServerResponse>(this.apiEndpoint)
                 .success((response) => {
                     deferred.resolve(this.processResponse(response));
                 }).error((error) => {
@@ -33,10 +32,30 @@ module app.services {
             return deferred.promise;
         }
 
-        getById(id: number): ng.IPromise<models.Location> {
+        getById(id:number):ng.IPromise<models.Location> {
             var deferred = this.$q.defer<models.Location>();
 
-            this.$http.get<models.SeverResponse>()
+            this.$http.get<models.ServerResponse>(this.apiEndpoint, {itemid: id})
+                .success((response) => {
+                    deferred.resolve(this.processResponse(response)[0]);
+                }).error((error) => {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
+        search(district?:string, searchTerm?:string):ng.IPromise<models.Location[]> {
+            var deferred = this.$q.defer<models.Location[]>();
+
+            this.$http.get<models.ServerResponse>(this.apiEndpoint, {n: district, s: searchTerm})
+                .success((response) => {
+                    deferred.resolve(this.processResponse(response));
+                }).error((error) => {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
         }
 
         private processResponse(response:models.ServerResponse):models.Location[] {

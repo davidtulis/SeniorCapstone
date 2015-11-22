@@ -47,3 +47,57 @@ A mobile app for the [River City Company](http://www.rivercitycompany.com)
     - updates your package.json with the latest npm packages
 4.	````sudo npm install````
     - installs latest node packages from your package.json to the newly created node_modules folder.
+
+## JSON Feed
+JSON feed comes from http://www.downtownchattanooga.org/feeds/mapdatav3.json.html?n=&s=taco
+
+Example JSON feed
+```json
+{
+
+	"Items": [
+        {
+            "itemid": "4917995",
+            "title": "1401 Gallery",
+            "address1": "1478 Market St",
+            "address2": "",
+            "city": "Chattanooga",
+            "state": "TN",
+            "zipcode": "37408",
+            "country": "US",
+            "latitude": "35.036196",
+            "longitude": "-85.307032",
+            "neighborhood": "Southside",
+            "tags": "Gallery",
+            "external link": "http://www.gallery1401.com/"}
+        ,
+        {
+            "itemid": "7988335",
+            "title": "area 61",
+            "address1": "61 E. Main St",
+            "address2": "",
+            "city": "Chattanooga",
+            "state": "TN",
+            "zipcode": "",
+            "country": "US",
+            "latitude": "35.035675",
+            "longitude": "-85.305494",
+            "neighborhood": "Southside",
+            "tags": "Gallery",
+            "external link": "https://www.facebook.com/area61Chattanooga/timeline"}
+        ,
+        ...
+}
+```
+
+### Tags include: 
+ - Clothing
+  - Men
+  - Women
+  - Children
+ - Coffee
+ - Var
+ - Restaurants
+ - Home Décor
+ - Gallery
+ - Gifts

@@ -40,7 +40,7 @@ module app.controllers {
                 new google.maps.Marker({
                     position: new google.maps.LatLng(ctrl.location.latitude, ctrl.location.longitude),
                     map: ctrl.map,
-                    title: ctrl.location.name
+                    title: ctrl.location.title
                 });
 
                 ctrl.showLoading(false);
