@@ -16,7 +16,6 @@ module app.models {
         public city: string;
         public state: string;
         public zipCode: number;
-        public website: string;
         public neighborhood: string;
         public title: string;
         public tags: string;
@@ -51,7 +50,7 @@ module app.models {
             this.city = data.city;
             this.state = data.state;
             this.zipCode = data.zipCode;
-            this.website = data.website;
+            this.website = data["external link"];
             this.district = data.neighborhood;
             this.title = data.title;
             this.tags = data.tags.split(',');
