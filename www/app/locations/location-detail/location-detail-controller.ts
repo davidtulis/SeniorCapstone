@@ -33,7 +33,7 @@ module app.controllers {
                     mapTypeId: <number>google.maps.MapTypeId.ROADMAP
                 };
                
-                var target = document.querySelector(".mapClass");
+                var target = document.getElementById("locationmap");
 
                 ctrl.map = new google.maps.Map(target, mapOptions);
 
