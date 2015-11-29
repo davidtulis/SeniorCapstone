@@ -10,13 +10,10 @@
                    {{ctrl.location.city}}, {{ctrl.location.state}} {{ctrl.location.zipcode}}</p>
             </label>
             <label class="item item-input item-stacked-label item-text-wrap" ng-if="ctrl.location.website">
-                <span class="input-label">Website</span>
-                <p>
-                    <a href="#" ng-click="ctrl.openBrowser($event)">{{ctrl.location.website}}</a>
-                </p>
+                <button class="button button-default" ng-click="ctrl.openBrowser()">Go to website</button>
             </label>
         </div>
         <div class="details-map" id="locationmap" data-tap-disabled="true"></div>
-        <a class="button button-block button-default" href="geo:{{ctrl.location.latitude}}, {{ctrl.location.longitude}}">Open in Google Maps</a>
+        <a class="button button-block button-default" href="geo:{{ctrl.location.latitude}}, {{ctrl.location.longitude}}">Directions</a>
     </ion-content>
 </ion-view>

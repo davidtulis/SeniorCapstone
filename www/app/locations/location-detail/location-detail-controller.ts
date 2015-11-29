@@ -57,10 +57,9 @@ module app.controllers {
             });
         }
 
-        openBrowser(): boolean {
+        public openBrowser() {
             var ctrl = this;
             window.open(ctrl.location.website, "_system");
-            return false;
         }
 
         private showLoading(isLoading: boolean) {
