@@ -57,6 +57,12 @@ module app.controllers {
             });
         }
 
+        openBrowser(): boolean {
+            var ctrl = this;
+            window.open(ctrl.location.website, "_system");
+            return false;
+        }
+
         private showLoading(isLoading: boolean) {
             if (isLoading) {
                 this.$ionicLoading.show({

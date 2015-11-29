@@ -15,9 +15,9 @@ module app {
     ngApp.controller("LocationDetailsController", controllers.LocationDetailsController);
     ngApp.controller("MapController", controllers.MapController);
 
-    ngApp.run(function($ionicPlatform) {
+    ngApp.run(($ionicPlatform) => {
 
-        $ionicPlatform.ready(function() {
+        $ionicPlatform.ready(() => {
 
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -33,11 +33,15 @@ module app {
                 window["StatusBar"].overlaysWebView(false);
             }
         });
+
+        document.addEventListener("deviceready", () => {
+            window.open = cordova["InAppBrowser"]["open"];
+        }, false);
     });
 
-    ngApp.config(function($stateProvider: ng.ui.IStateProvider, 
+    ngApp.config(($stateProvider: ng.ui.IStateProvider,
                           $urlRouterProvider: ng.ui.IUrlRouterProvider, 
-                          $ionicConfigProvider) {
+                          $ionicConfigProvider) => {
         
         $ionicConfigProvider.backButton.text('').icon('ion-chevron-left').previousTitleText(false);
         

@@ -12,7 +12,7 @@
             <label class="item item-input item-stacked-label item-text-wrap" ng-if="ctrl.location.website">
                 <span class="input-label">Website</span>
                 <p>
-                    <a href="{{ctrl.location.website}}">{{ctrl.location.website}}</a>
+                    <a href="#" ng-click="ctrl.openBrowser($event)">{{ctrl.location.website}}</a>
                 </p>
             </label>
         </div>
