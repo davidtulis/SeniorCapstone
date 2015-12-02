@@ -1,5 +1,5 @@
 /**
- * Created by NOT FUCKING john on 9/12/15.
+ * Created by john on 9/12/15.
  */
 
 /// <reference path="../../_app.ts" />
@@ -57,9 +57,17 @@ module app.controllers {
             });
         }
 
-        public openBrowser() {
+        openBrowser() {
             var ctrl = this;
             window.open(ctrl.location.website, "_system");
+        }
+
+        openMap() {
+            var ctrl = this;
+
+            var lngLat = ctrl.location.latitude + "," + ctrl.location.longitude;
+
+            window.open("http://maps.google.com/maps?&mrt=yp&t=m&q="+ ctrl.location.latitude + "+" + ctrl.location.longitude, "_system");
         }
 
         private showLoading(isLoading: boolean) {

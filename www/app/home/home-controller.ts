@@ -1,5 +1,5 @@
 /**
- * Created by NOT FUCKING john on 9/12/15.
+ * Created by john on 9/12/15.
  */
 
 /// <reference path="../_app.ts" />

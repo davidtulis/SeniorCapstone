@@ -1,35 +1,39 @@
-/**
- * Created by your fucking mother on 6/9/69.
- */
-
 /// <reference path="../_app.ts" />
-
-
-// http://codepen.io/ionic/pen/uzngt?editors=001
 
 module app.controllers {
     'use strict';
 
+	class MarkerWithId extends google.maps.Marker {
+		id: number;
+	}
+
     export class MapController {
 		public map: google.maps.Map;
 		public latLng: google.maps.LatLng;
-		public mapOptions: google.maps.MapOptions;
-		public infowindow: google.maps.InfoWindow;
-		public marker: google.maps.Marker;
+		public locations: models.Location[];
 		
         constructor(private LocationService: services.ILocationService,
-					private $ionicLoading) {
+					private $ionicLoading,
+					private $state: ng.ui.IStateService) {
 			var ctrl = this;
 
 			ctrl.showLoading(true);
 
 			LocationService.getAll().then((response) => {
 				ctrl.init();
+				ctrl.locations = response;
 				response.forEach((location) => {
-					new google.maps.Marker({
+					var marker = new MarkerWithId({
 						position: new google.maps.LatLng(location.latitude, location.longitude),
 						map: ctrl.map,
-						title: location.title
+						title: location.title,
+						clickable: true
+					});
+
+					marker.id = location.id;
+
+					marker.addListener("click", () => {
+						$state.go("app.details", {id: marker.id});
 					});
 				});
 
@@ -44,7 +48,7 @@ module app.controllers {
 			
 			var mapOptions = {
 				center: ctrl.latLng,
-				zoom: 12,
+				zoom: 14,
 				mapTypeId: <number>google.maps.MapTypeId.ROADMAP
 			};
 
